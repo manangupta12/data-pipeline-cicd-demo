@@ -1,0 +1,92 @@
+{
+  "pipeline": {
+    "name": "data-pipeline-etl-cd",
+    "roleArn": "arn:aws:iam::__AWS_ACCOUNT_ID__:role/data-pipeline-codepipeline-role",
+    "pipelineType": "V2",
+    "artifactStore": {
+      "type": "S3",
+      "location": "__ARTIFACT_BUCKET__"
+    },
+    "stages": [
+      {
+        "name": "Source",
+        "actions": [
+          {
+            "name": "GitHubSource",
+            "actionTypeId": {
+              "category": "Source",
+              "owner": "AWS",
+              "provider": "CodeStarSourceConnection",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ConnectionArn": "__CONNECTION_ARN__",
+              "FullRepositoryId": "__GITHUB_USER__/__REPO_NAME__",
+              "BranchName": "main",
+              "OutputArtifactFormat": "CODE_ZIP"
+            },
+            "outputArtifacts": [
+              {
+                "name": "SourceOutput"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Build",
+        "actions": [
+          {
+            "name": "BuildAndTest",
+            "actionTypeId": {
+              "category": "Build",
+              "owner": "AWS",
+              "provider": "CodeBuild",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "ProjectName": "etl-customer-build"
+            },
+            "inputArtifacts": [
+              {
+                "name": "SourceOutput"
+              }
+            ],
+            "outputArtifacts": [
+              {
+                "name": "BuildOutput"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Deploy",
+        "actions": [
+          {
+            "name": "DeployLambda",
+            "actionTypeId": {
+              "category": "Deploy",
+              "owner": "AWS",
+              "provider": "Lambda",
+              "version": "1"
+            },
+            "runOrder": 1,
+            "configuration": {
+              "FunctionName": "__LAMBDA_NAME__",
+              "FunctionAlias": "prod",
+              "DeployStrategy": "AllAtOnce"
+            },
+            "inputArtifacts": [
+              {
+                "name": "BuildOutput"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

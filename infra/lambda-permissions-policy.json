@@ -1,0 +1,37 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadCustomerCsvFromS3",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::YOUR_S3_BUCKET",
+        "arn:aws:s3:::YOUR_S3_BUCKET/*"
+      ]
+    },
+    {
+      "Sid": "WriteRecordsToDynamoDb",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:PutItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:DescribeTable"
+      ],
+      "Resource": "arn:aws:dynamodb:__AWS_REGION__:__AWS_ACCOUNT_ID__:table/YOUR_DYNAMODB_TABLE"
+    },
+    {
+      "Sid": "LambdaBasicExecution",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:__AWS_REGION__:__AWS_ACCOUNT_ID__:*"
+    }
+  ]
+}

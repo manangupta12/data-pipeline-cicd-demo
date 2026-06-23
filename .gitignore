@@ -1,0 +1,6 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+function.zip
+infra/rendered/
+.env
