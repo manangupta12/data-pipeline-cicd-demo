@@ -249,4 +249,5 @@ Delete in order: CodePipeline → CodeBuild project → S3 artifact bucket → I
 
 ## Optional CLI automation
 
-See `scripts/setup-aws.sh` if you prefer CLI over console for Step 6.
+- **[SETUP-WALKTHROUGH-CLI.md](SETUP-WALKTHROUGH-CLI.md)** — full AWS CLI guide (install, login, all resources)
+- `scripts/setup-aws.sh` — shortcut for Steps 4–9 after connection is authorized

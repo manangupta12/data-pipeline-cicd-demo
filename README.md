@@ -2,15 +2,9 @@
 
 ETL Lambda (S3 → DynamoDB) with GitHub Actions CI and AWS CodePipeline CD.
 
-**Setup guide:** follow the 7 steps in **[SETUP-WALKTHROUGH.md](SETUP-WALKTHROUGH.md)**
-
-1. Create a new repo  
-2. Clone this shared code  
-3. Copy folders into your repo locally  
-4. Push to GitHub  
-5. Verify GitHub Actions  
-6. Integrate AWS CodePipeline  
-7. Verify CodePipeline  
+**Setup guides:**
+- **[SETUP-WALKTHROUGH.md](SETUP-WALKTHROUGH.md)** — Console + GitHub (7 steps)
+- **[SETUP-WALKTHROUGH-CLI.md](SETUP-WALKTHROUGH-CLI.md)** — AWS CLI (install → CodePipeline)
 
 ## Repo structure
 
